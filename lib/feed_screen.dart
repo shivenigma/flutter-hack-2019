@@ -3,6 +3,7 @@ import 'package:team_up/feed_card.dart';
 
 import 'login/authentication.dart';
 import 'package:team_up/FirestoreHelper.dart';
+import 'package:team_up/Idea.dart';
 
 class FeedScreen extends StatefulWidget {
   FeedScreen(
@@ -31,6 +32,38 @@ class _FeedScreenState extends State<FeedScreen> {
   final String userId;
   final String name;
   final String email;
+  List<Idea> ideas;
+  List<Widget> listItems;
+  bool loading = true;
+  @override
+  void initState() {
+    FirestoreHelper().fetchPostedIdeas().then((list) {
+      List<Idea> tempIdeas = [];
+      List<Widget> tempCards = [];
+      list.forEach((data) {
+        Idea idea = Idea(
+            data['title'],
+            data['description'],
+            data['tags'],
+            data['isClosedSource'],
+            data['userId'],
+            data['userName'],
+            data['createdTime']);
+
+        tempCards.add(
+          FeedCard(idea: idea),
+        );
+        tempIdeas.add(idea);
+      });
+      print(tempIdeas.first.toMap());
+      setState(() {
+        this.ideas = tempIdeas;
+        this.listItems = tempCards;
+        this.loading = false;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,32 +75,15 @@ class _FeedScreenState extends State<FeedScreen> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           padding: EdgeInsets.only(bottom: 0.0),
-          children: <Widget>[
-            FeedCard(
-              id: '1',
-              title: 'One Idea',
-              subTitle:
-                  'Can change the world, Can change the world, Can change the world, Can change the world, Can change the world, Can change the world, Can change the world, Can change the world',
-            ),
-            FeedCard(
-              id: '2',
-              title: 'One more Idea',
-              subTitle:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-            )
-          ],
+          children: loading
+              ? [Center(child: CircularProgressIndicator())]
+              : this.listItems,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.pushNamed(context, '/create', arguments: { 'email' : email, 'userId' : userId});
-          // to fetch idea feeds
-          FirestoreHelper().fetchPostedIdeas().then((list) {
-            list.forEach((data) {
-              print(data.data);
-            });
-          });
         },
       ),
     );

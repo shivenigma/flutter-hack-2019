@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:team_up/FirestoreHelper.dart';
 import 'package:team_up/Idea.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostIdeaPage extends StatefulWidget {
   
@@ -30,41 +30,45 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
   _PostIdeaPageState(this.userDetail);
 
   Widget _buildTitleTextField() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Title',
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(),
-        labelStyle: TextStyle(fontSize: 20),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        autofocus: false,
+        decoration: InputDecoration(
+            labelText: 'Title',
+            alignLabelWithHint: true,
+            labelStyle: TextStyle(color: Colors.purpleAccent)),
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Please enter a valid title';
+          }
+        },
+        onSaved: (String value) {
+          _formData['title'] = value;
+        },
       ),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Please enter a valid title';
-        }
-      },
-      onSaved: (String value) {
-        _formData['title'] = value;
-      },
     );
   }
 
   Widget _buildDescriptionTextField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          labelText: 'Description',
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(),
-          labelStyle: TextStyle(fontSize: 20)),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Please enter description';
-        }
-      },
-      onSaved: (String value) {
-        _formData['description'] = value;
-      },
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+      child: TextFormField(
+        minLines: 1,
+        maxLines: 20,
+        decoration: InputDecoration(
+            labelText: 'Description',
+            labelStyle: TextStyle(color: Colors.purpleAccent)),
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Please enter description';
+          }
+        },
+        onSaved: (String value) {
+          _formData['description'] = value;
+        },
+      ),
     );
   }
 
@@ -80,32 +84,51 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
   }
 
   Widget _buildTagField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          labelText: 'Tags',
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(),
-          labelStyle: TextStyle(fontSize: 20)),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Please enter tags';
-        }
-      },
-      onSaved: (String value) {
-        _formData['tags'] = value;
-      },
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+      child: TextFormField(
+        decoration: InputDecoration(
+            labelText: 'Tags',
+            labelStyle: TextStyle(color: Colors.purpleAccent)),
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Please enter tags';
+          }
+        },
+        onSaved: (String value) {
+          _formData['tags'] = value;
+        },
+      ),
     );
   }
 
   Widget _submitButtonField() {
-    return RaisedButton(
-      onPressed: _submitForm,
-      textColor: Colors.white,
-      color: Colors.red,
-      padding: const EdgeInsets.all(8.0),
-      child: new Text(
-        "Submit",
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 50.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.deepPurple,
+            child: new Text('Create',
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: _submitForm,
+          ),
+        ));
+  }
+
+  Widget _showLogo() {
+    return new Hero(
+      tag: 'hero',
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          radius: 60.0,
+          child: Image.asset('assets/app_logo_login.png'),
+        ),
       ),
     );
   }
@@ -147,41 +170,34 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Create'),
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Post Idea'),
         ),
-        body: Container(
-          padding: EdgeInsets.all(10.0),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Container(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      _buildTitleTextField(),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      _buildDescriptionTextField(),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      _buildTagField(),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      _buildToggleSwitchField(),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      _submitButtonField()
-                    ],
-                  ),
-                ),
-              ),
-            ),
+        body: Stack(
+          children: <Widget>[
+            _showBody() /*,
+            _showCircularProgress(),*/
+          ],
+        ));
+  }
+
+  Widget _showBody() {
+    return new Container(
+        padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+        child: new Form(
+          key: _formKey,
+          child: new ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              _showLogo(),
+              _buildTitleTextField(),
+              _buildDescriptionTextField(),
+              _buildTagField(),
+              /*
+              _buildToggleSwitchField(),*/
+              _submitButtonField()
+            ],
           ),
         ));
   }
