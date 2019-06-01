@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../feed_screen.dart';
 import '../main.dart';
 import 'authentication.dart';
 import 'login_signup_page.dart';
@@ -78,7 +79,7 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return new MyHomePage(
+          return new FeedScreen(
             userId: _userId,
             auth: widget.auth,
             onSignedOut: _onSignedOut,
