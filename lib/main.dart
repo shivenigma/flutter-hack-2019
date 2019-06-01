@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:team_up/FirestoreHelper.dart';
+import 'package:team_up/Idea.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,6 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+
+    Idea idea = new Idea('idea-title', 'idea-desc', '#tags', '123', 'karthi', '01062019');
+
+    FirestoreHelper helper = new FirestoreHelper();
+    helper.postIdea(idea);
+
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
