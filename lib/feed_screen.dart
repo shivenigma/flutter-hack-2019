@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:team_up/feed_card.dart';
 
+import 'login/authentication.dart';
+
 class FeedScreen extends StatefulWidget {
+  FeedScreen({Key key, this.auth, this.userId, this.onSignedOut})
+      : super(key: key);
+
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+  final String userId;
+
   @override
   _FeedScreenState createState() => _FeedScreenState();
 }
