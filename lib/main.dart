@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           var routes = <String, WidgetBuilder>{
             '/': (context) => TeamUpp(),
-            '/create': (context) => PostIdeaPage(),
+            '/create': (context) => PostIdeaPage(settings.arguments),
             // Other screen
             //'/details': (context) => DetailsScreen(settings.arguments),
             // '/login': (context) => LoginScreen(),

@@ -83,7 +83,7 @@ class _FeedScreenState extends State<FeedScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, '/create');
+          Navigator.pushNamed(context, '/create', arguments: { 'email' : email, 'userId' : userId});
         },
       ),
     );
