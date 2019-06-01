@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "562274240031",
+    "firebase_url": "https://flutterhack-teamup.firebaseio.com",
+    "project_id": "flutterhack-teamup",
+    "storage_bucket": "flutterhack-teamup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562274240031:android:c71b018e5934e32d",
+        "android_client_info": {
+          "package_name": "com.hack19.team_up"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562274240031-jsn4n8cnbhqle8oqmqsuqtte7sk0ks0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWTbrX0m0GVmpyWNMFn_94LReMpBvGYk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562274240031-jsn4n8cnbhqle8oqmqsuqtte7sk0ks0l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
