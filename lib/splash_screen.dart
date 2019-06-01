@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:team_up/dummy_home.dart';
+import 'package:team_up/feed_screen.dart';
 
 class TeamUpp extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _TeamUppState extends State<TeamUpp> {
   Widget build(BuildContext context) {
     return new SplashScreen(
         seconds: 5,
-        navigateAfterSeconds: MyHomePage(),
+        navigateAfterSeconds: FeedScreen(),
         title: new Text(
           'Let\'s Team Upp',
           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
