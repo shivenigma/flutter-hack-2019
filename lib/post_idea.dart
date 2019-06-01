@@ -4,9 +4,8 @@ import 'package:team_up/FirestoreHelper.dart';
 import 'package:team_up/Idea.dart';
 
 class PostIdeaPage extends StatefulWidget {
-  
   var arguments;
-  
+
   PostIdeaPage(this.arguments);
 
   @override
@@ -25,6 +24,7 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     'tags': null,
     'toggle': false
   };
+
   //TextEditingController _textFieldController = TextEditingController();
 
   _PostIdeaPageState(this.userDetail);
@@ -141,7 +141,20 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     print('_formData');
     print(_formData);
 
-    new FirestoreHelper().postIdea(new Idea(_formData['title'], _formData['description'], _formData['tags'], _formData['toggle'], userDetail['userId'], userDetail['email'], FieldValue.serverTimestamp()));
+    new FirestoreHelper()
+        .postIdea(new Idea(
+            _formData['title'],
+            _formData['description'],
+            _formData['tags'],
+            _formData['toggle'],
+            userDetail['userId'],
+            userDetail['email'],
+            FieldValue.serverTimestamp()))
+        .then((data) {
+      print("submit done..");
+    }).catchError((error) {
+      print("on error..");
+    });
 
     /*Map<String, dynamic> response;
     response = await postIdea(_formData);
