@@ -114,7 +114,7 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     return new Hero(
       tag: 'hero',
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 60.0,
@@ -182,7 +182,7 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
 
   Widget _showBody() {
     return new Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
         child: new Form(
           key: _formKey,
           child: new ListView(
@@ -191,7 +191,8 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
               _showLogo(),
               _buildTitleTextField(),
               _buildDescriptionTextField(),
-              _buildTagField(),/*
+              _buildTagField(),
+              /*
               _buildToggleSwitchField(),*/
               _submitButtonField()
             ],
