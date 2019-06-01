@@ -4,18 +4,33 @@ import 'package:team_up/feed_card.dart';
 import 'login/authentication.dart';
 
 class FeedScreen extends StatefulWidget {
-  FeedScreen({Key key, this.auth, this.userId, this.onSignedOut})
+  FeedScreen(
+      {Key key,
+      this.auth,
+      this.userId,
+      this.onSignedOut,
+      this.name,
+      this.email})
       : super(key: key);
 
   final BaseAuth auth;
   final VoidCallback onSignedOut;
   final String userId;
+  final String name;
+  final String email;
 
   @override
-  _FeedScreenState createState() => _FeedScreenState();
+  _FeedScreenState createState() => _FeedScreenState(auth, userId, name, email);
 }
 
 class _FeedScreenState extends State<FeedScreen> {
+  _FeedScreenState(this.auth, this.userId, this.name, this.email);
+
+  final BaseAuth auth;
+  final String userId;
+  final String name;
+  final String email;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +61,9 @@ class _FeedScreenState extends State<FeedScreen> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.pushNamed(context, '/create');
+          print('$userId');
+          print('$name');
+          print('$email');
         },
       ),
     );
