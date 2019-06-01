@@ -186,11 +186,11 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     return new Hero(
       tag: 'hero',
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
-          radius: 48.0,
-          child: Image.asset('assets/flutter-icon.png'),
+          radius: 120.0,
+          child: Image.asset('assets/app_logo_login.png'),
         ),
       ),
     );
@@ -198,16 +198,18 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
 
   Widget _showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Email',
+            labelText: 'Email',
+            alignLabelWithHint: true,
+            labelStyle: new TextStyle(color: Colors.purpleAccent),
             icon: new Icon(
               Icons.mail,
-              color: Colors.grey,
+              color: Colors.deepPurple,
             )),
         validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
         onSaved: (value) => _email = value,
@@ -223,10 +225,12 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            labelText: 'Password',
+            alignLabelWithHint: true,
+            labelStyle: new TextStyle(color: Colors.purpleAccent),
             icon: new Icon(
               Icons.lock,
-              color: Colors.grey,
+              color: Colors.deepPurple,
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value,
@@ -252,12 +256,12 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     return new Padding(
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
         child: SizedBox(
-          height: 40.0,
+          height: 50.0,
           child: new RaisedButton(
             elevation: 5.0,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
+            color: Colors.deepPurple,
             child: _formMode == FormMode.LOGIN
                 ? new Text('Login',
                     style: new TextStyle(fontSize: 20.0, color: Colors.white))
