@@ -203,6 +203,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
+        textCapitalization: TextCapitalization.none,
         decoration: new InputDecoration(
             labelText: 'Email',
             alignLabelWithHint: true,
