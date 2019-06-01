@@ -8,14 +8,14 @@ class PostIdeaPage extends StatefulWidget {
 }
 
 class _PostIdeaPageState extends State<PostIdeaPage> {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final Map<String, dynamic> _formData = {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final Map<String, dynamic> _formData = {
     'title': null,
     'description': null,
     'tags': null,
     'toggle': false
   };
-    TextEditingController _textFieldController = TextEditingController();
+  TextEditingController _textFieldController = TextEditingController();
   Widget _buildTitleTextField() {
     return TextFormField(
       decoration: InputDecoration(
@@ -26,7 +26,7 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
         labelStyle: TextStyle(fontSize: 20),
       ),
       validator: (String value) {
-        if (value.isEmpty ) {
+        if (value.isEmpty) {
           return 'Please enter a valid title';
         }
       },
@@ -54,10 +54,11 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
       },
     );
   }
+
   Widget _buildToggleSwitchField() {
     return Switch(
-      value:_formData['toggle'],
-      activeTrackColor: Colors.lightGreenAccent, 
+      value: _formData['toggle'],
+      activeTrackColor: Colors.lightGreenAccent,
       activeColor: Colors.green,
       onChanged: (value) {
         _formData['toggle'] = value;
@@ -65,8 +66,8 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     );
   }
 
-  Widget _buildTagField(){
-   return TextFormField(
+  Widget _buildTagField() {
+    return TextFormField(
       decoration: InputDecoration(
           labelText: 'Tags',
           filled: true,
@@ -82,22 +83,21 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
         _formData['tags'] = value;
       },
     );
-
   }
 
-  Widget _submitButtonField(){
+  Widget _submitButtonField() {
     return RaisedButton(
-                    onPressed: _submitForm,
-                    textColor: Colors.white,
-                    color: Colors.red,
-                    padding: const EdgeInsets.all(8.0),
-                    child: new Text(
-                      "Submit",
-                    ),
-                  );
+      onPressed: _submitForm,
+      textColor: Colors.white,
+      color: Colors.red,
+      padding: const EdgeInsets.all(8.0),
+      child: new Text(
+        "Submit",
+      ),
+    );
   }
 
- void _submitForm() async {
+  void _submitForm() async {
     if (!_formKey.currentState.validate()) {
       return;
     }
@@ -128,10 +128,14 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
       );
     }*/
   }
-@override
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        appBar: AppBar(
+          title: Text('Create'),
+        ),
+        body: Container(
           padding: EdgeInsets.all(10.0),
           child: Center(
             child: SingleChildScrollView(
@@ -140,15 +144,15 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                        _buildTitleTextField(),
-                        SizedBox(
+                      _buildTitleTextField(),
+                      SizedBox(
                         height: 10.0,
                       ),
-                        _buildDescriptionTextField(),
-                         SizedBox(
+                      _buildDescriptionTextField(),
+                      SizedBox(
                         height: 10.0,
                       ),
-                        _buildTagField(),
+                      _buildTagField(),
                       SizedBox(
                         height: 10.0,
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:team_up/splash_screen.dart';
+import 'package:team_up/post_idea.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,8 +14,8 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (RouteSettings settings) {
         var routes = <String, WidgetBuilder>{
           '/': (context) => TeamUpp(),
+          '/create': (context) => PostIdeaPage(),
           // Other screen
-          //'/create': (context) => CreateScreen(),
           //'/details': (context) => DetailsScreen(settings.arguments),
           // '/login': (context) => LoginScreen(),
           // '/feed': (context) => FeedScreen(),
