@@ -18,6 +18,7 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     'tags': null,
     'toggle': false
   };
+  bool _isLoading;
   TextEditingController _textFieldController = TextEditingController();
 
   Widget _buildTitleTextField() {
@@ -124,10 +125,24 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     );
   }
 
+  Widget _showCircularProgress() {
+    if (_isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return Container(
+      height: 0.0,
+      width: 0.0,
+    );
+  }
+
   void _submitForm() async {
     if (!_formKey.currentState.validate()) {
       return;
     }
+    setState(() {
+      _isLoading = true;
+    });
+
     _formKey.currentState.save();
     print('_formData');
     print(_formData);
@@ -140,30 +155,6 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
         '123',
         'karthi',
         FieldValue.serverTimestamp()));
-
-    /*Map<String, dynamic> response;
-    response = await postIdea(_formData);
-    if (response['success']) {
-      // Navigator.pushReplacementNamed(context, '/');
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('An Error Occurred!'),
-            content: Text(response['message']),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Okay'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        },
-      );
-    }*/
   }
 
   @override
@@ -174,10 +165,16 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
         ),
         body: Stack(
           children: <Widget>[
-            _showBody() /*,
-            _showCircularProgress(),*/
+            _showBody(),
+            _showCircularProgress(),
           ],
         ));
+  }
+
+  @override
+  void initState() {
+    _isLoading = false;
+    super.initState();
   }
 
   Widget _showBody() {
