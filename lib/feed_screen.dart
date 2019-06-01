@@ -70,6 +70,7 @@ class _FeedScreenState extends State<FeedScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Ideas'),
+        actions: <Widget>[Icon(Icons.filter_list)],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
