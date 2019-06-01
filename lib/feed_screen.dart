@@ -43,7 +43,7 @@ class _FeedScreenState extends State<FeedScreen> {
       list.forEach((data) {
         Idea idea = Idea(
             data['title'],
-            data['description'],
+            data['desc'],
             data['tags'],
             data['isClosedSource'],
             data['userId'],
