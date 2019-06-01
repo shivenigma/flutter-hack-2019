@@ -3,8 +3,8 @@ import 'package:team_up/Idea.dart';
 import 'dart:async';
 
 class FirestoreHelper {
-  void postIdea(Idea idea) {
-    Firestore.instance.collection('ideas').add(idea.toMap());
+  Future<DocumentReference> postIdea(Idea idea) {
+    return Firestore.instance.collection('ideas').add(idea.toMap());
   }
 
   Future<List<DocumentSnapshot>> fetchPostedIdeas() async {

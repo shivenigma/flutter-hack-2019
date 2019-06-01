@@ -154,15 +154,24 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     _formKey.currentState.save();
     print('_formData');
     print(_formData);
-
-    new FirestoreHelper().postIdea(new Idea(
-        _formData['title'],
-        _formData['description'],
-        _formData['tags'],
-        _formData['toggle'],
-        userDetail['userId'],
-        userDetail['email'],
-        FieldValue.serverTimestamp()));
+    new FirestoreHelper()
+        .postIdea(new Idea(
+            _formData['title'],
+            _formData['description'],
+            _formData['tags'],
+            _formData['toggle'],
+            userDetail['userId'],
+            userDetail['email'],
+            FieldValue.serverTimestamp()))
+        .then((data) {
+      setState(() {
+        _isLoading = false;
+      });
+    }).catchError((error) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   @override
