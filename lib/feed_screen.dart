@@ -61,7 +61,7 @@ class _FeedScreenState extends State<FeedScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, '/create');
+          Navigator.pushNamed(context, '/create', arguments: { 'email' : email, 'userId' : userId});
           // to fetch idea feeds
           FirestoreHelper().fetchPostedIdeas().then((list) {
             list.forEach((data) {
