@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           return MaterialPageRoute(builder: (ctx) => builder(ctx));
         },
         theme: ThemeData(
-          primarySwatch: Colors.purple,
+          primarySwatch: Colors.deepPurple,
         ),
 //      home: MyHomePage(title: 'Flutter Demo Home Page'),
         home: new RootPage(auth: new Auth()));

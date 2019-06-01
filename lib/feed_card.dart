@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:team_up/Idea.dart';
 
 class FeedCard extends StatelessWidget {
-  final String title;
-  final String subTitle;
-  final String id;
-  FeedCard({@required this.id, @required this.title, this.subTitle});
+  final Idea idea;
+  FeedCard({@required this.idea});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -13,13 +12,13 @@ class FeedCard extends StatelessWidget {
         children: <Widget>[
           ListTile(
             title: Text(
-              this.title,
+              this.idea.title == null ? '' : this.idea.title,
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Text(this.subTitle),
+            subtitle: Text(this.idea.desc == null ? '' : this.idea.desc),
           ),
           ButtonTheme.bar(
             child: ButtonBar(
