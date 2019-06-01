@@ -1,6 +1,6 @@
 # team_up
 
-HACK19 - International Flutter Hackathon
+Flutter application developed in the flutter-hack-2019
 
 ## Getting Started
 
