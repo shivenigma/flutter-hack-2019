@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:team_up/FirestoreHelper.dart';
+import 'package:team_up/Idea.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostIdeaPage extends StatefulWidget {
   @override
@@ -104,6 +107,9 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     _formKey.currentState.save();
     print('_formData');
     print(_formData);
+
+    new FirestoreHelper().postIdea(new Idea(_formData['title'], _formData['description'], _formData['tags'], _formData['toggle'], '123', 'karthi', FieldValue.serverTimestamp()));
+
     /*Map<String, dynamic> response;
     response = await postIdea(_formData);
     if (response['success']) {

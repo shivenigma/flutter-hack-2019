@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:team_up/feed_card.dart';
 
 import 'login/authentication.dart';
+import 'package:team_up/FirestoreHelper.dart';
 
 class FeedScreen extends StatefulWidget {
   FeedScreen(
@@ -61,9 +62,12 @@ class _FeedScreenState extends State<FeedScreen> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.pushNamed(context, '/create');
-          print('$userId');
-          print('$name');
-          print('$email');
+          // to fetch idea feeds
+          FirestoreHelper().fetchPostedIdeas().then((list) {
+            list.forEach((data) {
+              print(data.data);
+            });
+          });
         },
       ),
     );
