@@ -4,13 +4,19 @@ import 'package:team_up/FirestoreHelper.dart';
 import 'package:team_up/Idea.dart';
 
 class PostIdeaPage extends StatefulWidget {
+  var arguments;
+
+  PostIdeaPage(this.arguments);
+
   @override
   State<StatefulWidget> createState() {
-    return _PostIdeaPageState();
+    return _PostIdeaPageState(arguments);
   }
 }
 
 class _PostIdeaPageState extends State<PostIdeaPage> {
+  var userDetail;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _formData = {
     'title': null,
@@ -18,8 +24,10 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
     'tags': null,
     'toggle': false
   };
+
   bool _isLoading;
-  TextEditingController _textFieldController = TextEditingController();
+
+  _PostIdeaPageState(this.userDetail);
 
   Widget _buildTitleTextField() {
     return Padding(
@@ -152,8 +160,8 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
         _formData['description'],
         _formData['tags'],
         _formData['toggle'],
-        '123',
-        'karthi',
+        userDetail['userId'],
+        userDetail['email'],
         FieldValue.serverTimestamp()));
   }
 
@@ -189,8 +197,6 @@ class _PostIdeaPageState extends State<PostIdeaPage> {
               _buildTitleTextField(),
               _buildDescriptionTextField(),
               _buildTagField(),
-              /*
-              _buildToggleSwitchField(),*/
               _submitButtonField()
             ],
           ),

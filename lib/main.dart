@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           var routes = <String, WidgetBuilder>{
             '/': (context) => TeamUpp(),
-            '/create': (context) => PostIdeaPage(),
+            '/create': (context) => PostIdeaPage(settings.arguments),
             // Other screen
             //'/details': (context) => DetailsScreen(settings.arguments),
             // '/login': (context) => LoginScreen(),
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           return MaterialPageRoute(builder: (ctx) => builder(ctx));
         },
         theme: ThemeData(
-          primarySwatch: Colors.purple,
+          primarySwatch: Colors.deepPurple,
         ),
 //      home: MyHomePage(title: 'Flutter Demo Home Page'),
         home: new RootPage(auth: new Auth()));
