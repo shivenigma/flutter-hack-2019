@@ -10,18 +10,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Team Upp',
       initialRoute: '/',
-      routes: {
-        // home screen
-        '/': (context) => TeamUpp(),
-        /**
-         * Created routes here, please enable them as you finish your screen and
-         * change the class name accordingly, don't forget to import the class file first
-         */
-        // Other screen
-        //'/create': (context) => CreateScreen(),
-        // '/details': (context) => DetailsScreen(),
-        // '/login': (context) => LoginScreen(),
-        // '/feed': (context) => FeedScreen(),
+      onGenerateRoute: (RouteSettings settings) {
+        var routes = <String, WidgetBuilder>{
+          '/': (context) => TeamUpp(),
+          // Other screen
+          //'/create': (context) => CreateScreen(),
+          //'/details': (context) => DetailsScreen(settings.arguments),
+          // '/login': (context) => LoginScreen(),
+          // '/feed': (context) => FeedScreen(),
+        };
+        WidgetBuilder builder = routes[settings.name];
+        return MaterialPageRoute(builder: (ctx) => builder(ctx));
       },
       theme: ThemeData(
         primarySwatch: Colors.purple,
